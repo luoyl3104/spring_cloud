@@ -2,16 +2,19 @@ package com.luoyl.eureka_customer.controller;
 
 import com.luoyl.eureka_customer.config.RestTemplateConfig;
 import com.luoyl.eureka_customer.feign.Client1Feign;
+import com.luoyl.eureka_customer.kafka.KafkaCustomer;
+import com.luoyl.eureka_customer.kafka.KafkaProducer;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @RestController
@@ -23,6 +26,11 @@ public class CustomerController {
 
     @Autowired
     private RestTemplateConfig restTemplate;
+
+    @Autowired
+    private KafkaProducer kafkaProducer;
+
+
 
     @RequestMapping("test")
     public String test(){
@@ -47,4 +55,13 @@ public class CustomerController {
     public String testFallback(String name){
         return "错误处理，参数:"+name;
     }
+
+    @GetMapping("/sessionShare")
+    public String testSessionShare(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        //session.getSessionContext().getSession(session.getId());
+        kafkaProducer.sendSessionId(session.getId());
+        return session.getId();
+    }
+
 }
