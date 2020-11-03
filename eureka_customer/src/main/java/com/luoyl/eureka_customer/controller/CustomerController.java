@@ -1,11 +1,13 @@
 package com.luoyl.eureka_customer.controller;
 
 import com.luoyl.eureka_customer.config.RestTemplateConfig;
+import com.luoyl.eureka_customer.entity.TUser;
 import com.luoyl.eureka_customer.feign.Client1Feign;
 import com.luoyl.eureka_customer.kafka.KafkaCustomer;
 import com.luoyl.eureka_customer.kafka.KafkaProducer;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
+import io.swagger.annotations.Api;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
+@Api(value = "CustomerController")
 @RequestMapping("customer")
 public class CustomerController {
 
@@ -32,7 +36,7 @@ public class CustomerController {
 
 
 
-    @RequestMapping("test")
+    @RequestMapping(value = "test",method = RequestMethod.POST)
     public String test(){
         RestTemplate restTemplate = new RestTemplate();
         String forObject = restTemplate.getForObject("http://localhost:8088/client1/test1", String.class);
@@ -62,6 +66,12 @@ public class CustomerController {
         //session.getSessionContext().getSession(session.getId());
         kafkaProducer.sendSessionId(session.getId());
         return session.getId();
+    }
+
+    @PostMapping("getClient1TUser")
+    public List<TUser> getClient1TUser(){
+        //List<TUser> tUsers = client1Feign.queryAll();
+        return client1Feign.queryAll();
     }
 
 }
