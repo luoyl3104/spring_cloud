@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
@@ -74,6 +75,8 @@ public class TimeTest {
         LocalDateTime hours = localDateTime.plusHours(2);
         LocalDateTime months = localDateTime.plusMonths(1);
         LocalDateTime years = localDateTime.plusYears(1);
+        localDateTime.minusMonths(1);//减少一个月
+
         logger.warn("加一天："+days);
         logger.warn("加两小时："+hours);
         logger.warn("加一个月："+months);
@@ -83,10 +86,26 @@ public class TimeTest {
 
     @Test
     public void test(){
-        int i = 0;
-        System.out.println(++i);
+        //int i = 0;
+        //System.out.println(++i);
         //
         // System.out.println(i++);
+        /*BigDecimal bigDecimal = new BigDecimal(0);
+        BigDecimal bigDecimal1 = new BigDecimal(20.83);
+        BigDecimal bigDecimal2 = new BigDecimal("20.83");
+        System.out.println(bigDecimal+","+bigDecimal1);
+        System.out.println(bigDecimal2);*/
+        String s = "'202010'";
+        System.out.println(s.length());
+        System.out.println(s.substring(1,s.length()-1));
+    }
+
+    @Test
+    public void test1(){
+        LocalDate now = LocalDate.now();
+        LocalDate localDate = LocalDate.of(2021, 1, 1);
+        LocalDate months = localDate.minusMonths(1);
+        System.out.println(months);
     }
 
 }

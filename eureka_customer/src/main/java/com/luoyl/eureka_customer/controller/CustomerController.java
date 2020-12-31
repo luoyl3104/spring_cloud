@@ -9,9 +9,12 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import io.swagger.annotations.Api;
 import org.apache.http.HttpRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServlet;
@@ -25,14 +28,16 @@ import java.util.List;
 @RequestMapping("customer")
 public class CustomerController {
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Resource
     private Client1Feign client1Feign;
 
     @Autowired
     private RestTemplateConfig restTemplate;
 
-    @Autowired
-    private KafkaProducer kafkaProducer;
+    //@Autowired
+    //private KafkaProducer kafkaProducer;
 
 
 
@@ -60,18 +65,31 @@ public class CustomerController {
         return "错误处理，参数:"+name;
     }
 
-    @GetMapping("/sessionShare")
+    /*@GetMapping("/sessionShare")
     public String testSessionShare(HttpServletRequest request){
         HttpSession session = request.getSession();
         //session.getSessionContext().getSession(session.getId());
         kafkaProducer.sendSessionId(session.getId());
         return session.getId();
-    }
+    }*/
 
     @PostMapping("getClient1TUser")
     public List<TUser> getClient1TUser(){
         //List<TUser> tUsers = client1Feign.queryAll();
         return client1Feign.queryAll();
     }
+
+    /*@PostMapping("testAdd")
+    public String testAdd(MultipartFile file){
+        try{
+            logger.debug("--------------");
+            return client1Feign.add(file.getInputStream());
+        }catch (Exception e){
+            e.printStackTrace();
+            return "error";
+        }
+    }*/
+
+
 
 }

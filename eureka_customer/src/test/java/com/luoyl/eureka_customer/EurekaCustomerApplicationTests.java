@@ -8,9 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class EurekaCustomerApplicationTests {
 
-    @Autowired
-    private KafkaCustomer kafkaCustomer;
-
     @Test
     void contextLoads() {
 

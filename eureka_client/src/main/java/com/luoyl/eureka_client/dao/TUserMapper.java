@@ -1,6 +1,7 @@
 package com.luoyl.eureka_client.dao;
 
 import com.luoyl.eureka_client.entity.TUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface TUserMapper {
     int updateByPrimaryKey(TUser record);
 
     List<TUser> selectAll();
+
+    void insertList(@Param("users") List<TUser> users);
 }

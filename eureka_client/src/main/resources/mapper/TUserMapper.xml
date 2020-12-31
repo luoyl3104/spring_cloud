@@ -85,4 +85,11 @@
     <include refid="Base_Column_List"/>
     from t_user
   </select>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into t_user (id,name,age,sex) values
+      <foreach collection="users" item="user" index="index" separator=",">
+        (#{user.id},#{user.name},#{user.age},#{user.sex})
+      </foreach>
+  </insert>
 </mapper>
