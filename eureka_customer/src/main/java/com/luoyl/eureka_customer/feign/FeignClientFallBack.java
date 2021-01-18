@@ -20,6 +20,11 @@ public class FeignClientFallBack implements Client1Feign{
         return null;
     }
 
+    @Override
+    public List<TUser> export() {
+        return null;
+    }
+
   /*  @Override
     public String add(InputStream inputStream) {
         return "Hystrix method is invoke ";

@@ -60,17 +60,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void export() {
+    public List<TUser> export() {
         List<TUser> tUsers = tUserMapper.selectAll();
         tUsers.stream().forEach(tUser -> System.out.println(tUser));
-        try{
-            ExcelUtils.excelExport(tUsers,TUser.class,"user");
-            logger.info("success");
-        }catch (Exception e){
-            logger.error("error");
-            e.printStackTrace();
-        }
-
+        return tUsers;
     }
 
 

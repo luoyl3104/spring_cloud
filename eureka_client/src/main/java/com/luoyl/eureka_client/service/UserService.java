@@ -12,5 +12,5 @@ public interface UserService {
     List<TUser> findAll();
     String addList(MultipartFile file);
     String add(InputStream inputStream);
-    void export();
+    List<TUser> export();
 }

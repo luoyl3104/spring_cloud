@@ -4,11 +4,23 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 
 public class ArrayTest {
 
+
+    @Test
+    public void testTime(){
+        //20201225
+        LocalDate dateTime = LocalDate.of(2020, 12, 6);
+        //20201204
+        LocalDate localDate = LocalDate.of(2020,12,4);
+        System.out.println(localDate.isBefore(dateTime));
+
+    }
 
     @Test
     public void sortTest(){

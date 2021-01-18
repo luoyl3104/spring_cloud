@@ -5,6 +5,7 @@ import com.luoyl.eureka_customer.entity.TUser;
 import com.luoyl.eureka_customer.feign.Client1Feign;
 import com.luoyl.eureka_customer.kafka.KafkaCustomer;
 import com.luoyl.eureka_customer.kafka.KafkaProducer;
+import com.luoyl.eureka_customer.utils.ExcelUtils;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import io.swagger.annotations.Api;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,6 +92,17 @@ public class CustomerController {
         }
     }*/
 
+    @GetMapping("export")
+    public void export(){
+        List<TUser> list = client1Feign.export();
 
+        try {
+            if (!list.isEmpty()) {
+                ExcelUtils.excelExport(list, TUser.class, "users");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

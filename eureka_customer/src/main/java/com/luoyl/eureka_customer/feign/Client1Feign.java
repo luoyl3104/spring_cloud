@@ -1,6 +1,7 @@
 package com.luoyl.eureka_customer.feign;
 
 import com.luoyl.eureka_customer.entity.TUser;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +26,9 @@ public interface Client1Feign {
 
     /*@PostMapping("user/add")
     String add(InputStream inputStream);*/
+
+    @PostMapping("user/export")
+    List<TUser> export();
+
 
 }

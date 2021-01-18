@@ -40,10 +40,10 @@ public class UserController {
         return userService.add(inputStream);
     }
 
-    @GetMapping("export")
+    @PostMapping("export")
     @ApiOperation(value = "export")
-    public void export(){
-        userService.export();
+    public List<TUser> export(){
+        return userService.export();
     }
 
 

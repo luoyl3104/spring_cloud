@@ -1,5 +1,6 @@
 package com.luoyl.eureka_customer.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,13 @@ import java.io.Serializable;
 public class TUser implements Serializable {
     private Long id;
 
+    @Excel(name = "姓名")
     private String name;
 
+    @Excel(name = "年龄")
     private Integer age;
 
+    @Excel(name = "性别")
     private Integer sex;
 
     private static final long serialVersionUID = 1L;
