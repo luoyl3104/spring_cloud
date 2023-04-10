@@ -1,10 +1,13 @@
 package com.luoyl.eureka_customer;
 
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class LambdaTest {
@@ -106,7 +109,18 @@ public class LambdaTest {
     @Test
     public void test(){
 
-
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(4);
+        //最大值
+        Optional<Integer> max = list.stream().max(Comparator.comparing(t -> t));
+        //最小值
+        Optional<Integer> min = list.stream().min(Comparator.comparing(i -> i));
+        if (max.isPresent()){
+            System.out.println(max.get());
+            System.out.println(min.get());
+        }
 
     }
 
@@ -120,5 +134,24 @@ public class LambdaTest {
         String[] s = str.split(" ");
         return s[s.length-1].length();
     }
+
+
+    @Test
+    public void testStr(){
+        String str = "2021年10月版";
+        char[] chars = str.toCharArray();
+        String s = String.valueOf(chars[4]);
+        System.out.println(s);
+        System.out.println(chars[4]);
+        System.out.println(chars[chars.length-1]);
+        System.out.println(chars[chars.length-2]);
+
+        Boolean b = true;
+
+
+
+    }
+
+
 
 }

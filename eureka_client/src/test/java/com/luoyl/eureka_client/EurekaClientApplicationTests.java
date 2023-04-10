@@ -1,6 +1,7 @@
 package com.luoyl.eureka_client;
 
 import com.luoyl.eureka_client.entity.TUser;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -11,6 +12,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
+import java.util.WeakHashMap;
+
 @SpringBootTest
 class EurekaClientApplicationTests {
 
@@ -39,6 +42,16 @@ class EurekaClientApplicationTests {
         tUser.setAge(18);
         tUser.setName("花花");
         System.out.println(tUser.toString());
+
+    }
+
+    @Test
+    void testName(){
+        String fileName = "abcd.aMD";
+        boolean md = fileName.toLowerCase().endsWith("md");
+        System.out.println(md);
+        String extension = FilenameUtils.getExtension(fileName.toLowerCase());
+        System.out.println(extension);
     }
 
 

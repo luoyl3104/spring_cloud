@@ -95,17 +95,38 @@ public class TimeTest {
         BigDecimal bigDecimal2 = new BigDecimal("20.83");
         System.out.println(bigDecimal+","+bigDecimal1);
         System.out.println(bigDecimal2);*/
-        String s = "'202010'";
+        /*String s = "'202010'";
         System.out.println(s.length());
-        System.out.println(s.substring(1,s.length()-1));
+        System.out.println(s.substring(1,s.length()-1));*/
+
+
+        LocalDate now = LocalDate.now();
+        System.out.println(now.format(DateTimeFormatter.ofPattern("yyyy-MM")));
+
+        LocalDate plusMonths = now.plusMonths(4);
+
+        LocalDate localDate = LocalDate.of(2021, 12, 1);
+
+
+
+        System.out.println(localDate.isBefore(plusMonths));
+        System.out.println(!localDate.isAfter(now));
+
     }
 
     @Test
     public void test1(){
-        LocalDate now = LocalDate.now();
+
+        System.out.println(5 < 7);
+
+        /*LocalDate now = LocalDate.now();
         LocalDate localDate = LocalDate.of(2021, 1, 1);
         LocalDate months = localDate.minusMonths(1);
-        System.out.println(months);
+        System.out.println(months);*/
+        /*LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMM");
+        String format = now.format(formatter);
+        System.out.println(format);*/
     }
 
 }

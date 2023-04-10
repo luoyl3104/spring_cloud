@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -96,6 +97,19 @@ public class ArrayTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void testD(){
+        BigDecimal bigDecimal = new BigDecimal("56.12");
+        System.out.println(bigDecimal.setScale(0,BigDecimal.ROUND_HALF_UP));
+    }
+
+    @Test
+    public void testC(){
+        BigDecimal bigDecimal = new BigDecimal("1.05");
+        BigDecimal bigDecimal1 = new BigDecimal("0.00");
+        System.out.println(bigDecimal1.compareTo(bigDecimal));
     }
 
 }
